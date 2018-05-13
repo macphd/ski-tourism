@@ -1,7 +1,7 @@
 # avoid loading the (large) raw scraping datasets by default... all could be regenerated in local environment.
 # 
 *.csv
-!/vis/**/*.csv
+!vis/**/*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
