@@ -28,7 +28,7 @@ shinyServer(function(input, output, session) {
     
     # find a new race destination!
     # known df size, select first row (imputed host country)
-    #  session$userData$host_var = pred_host[143833, 1] # attmpt at extracting variable for link to .md
+    #  session$userData$host_var = pred_host[143833, 1] # attmpt at extracting variable for link elsewhere
     #pass value for output
     paste("Reccomended race: ", pred_host[143833, 1])
     
@@ -51,9 +51,28 @@ shinyServer(function(input, output, session) {
                           zaxis = list(title = 'Skiiers')))
   })
 
-  output$mymap <- renderLeaflet({
-    leaflet() %>%
-      addProviderTiles("Esri.WorldStreetMap")
+  output$ski_map <- renderLeaflet({
+    m <- leaflet(latlong_df) %>%
+      addProviderTiles("Stamen.Watercolor")  %>% 
+      addMarkers(lng = ~long, lat = ~lat, label = ~abrev, popup = ~url,
+                 labelOptions = labelOptions(noHide = T, textsize = "15px"))
+    m
   })
+  
+# possibly integrate more interactive element by extracting country abbrev from the update reactive
+  # center <- reactive({
+  #   subset(data, nom == input$canton) 
+  #   # or whatever operation is needed to transform the selection 
+  #   # to an object that contains lat and long
+  # })
+  # 
+  # observe({
+  #   leafletProxy('map') %>% 
+  #     setView(lng =  center()$long, lat = center()$lat, zoom = 12)
+  # })
+  
+  
+  
+  
   
 })
