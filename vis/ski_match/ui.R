@@ -5,17 +5,22 @@ shinyUI(
              tabPanel("Reccomend a race",
                       sidebarLayout(
                         sidebarPanel(
-                          radioButtons("style", h3("Select XC style:"),
+                          h3("Worldloppet race reccomender"),
+                          "Input your XC skiing preferences below and find a match!
+                          Select the host country marker to find the race website.",
+                          radioButtons("style", h4("Select XC style:"),
                                        c("Classic/CT" = "CT", "Skate/FT" = "FT")),
-                          sliderInput("distance", label = h3("Distance (km)"), min = 10, 
+                          sliderInput("distance", label = h4("Preferred distance (km)"), min = 10, 
                                       max = 100, value = 21),
-                          sliderInput("pace", label = h3("Speed (km/hr)"), min = 2, 
+                          sliderInput("pace", label = h4("Personal race speed (km/hr)"), min = 2, 
                                       max = 27, value = 8.9, step = 0.1),
-                          sliderInput("n_ski", label = h3("Number of racers: 10^x"), min = 1, 
+                          sliderInput("n_ski", label = h4("Number of racers: 10^x"), min = 1, 
                                       max = 4.2, value = 1.85, step = 0.05),
-                          h4(textOutput("selected_nski")),
+                          h5(textOutput("selected_nski")),
                           hr(),
-                          actionButton("update", h5("Find a match!"))
+                          actionButton("update", h5("Find a match!")),
+                          h6("Disclaimer: This app is not affiliated with FIS/Worldloppet and
+                             is an independently developed data science project.")
                         ),
                         mainPanel(
                           leafletOutput("ski_map"),
