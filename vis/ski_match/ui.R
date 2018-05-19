@@ -23,7 +23,7 @@ shinyUI(
                              is an independently developed data science project.")
                         ),
                         mainPanel(
-                          leafletOutput("ski_map"),
+                          leafletOutput("ski_map", height = 550),
                           h1(textOutput("reccomended_race")),
                           tags$blockquote(h2(em("Free your heel, free your mind...")))
                           )
